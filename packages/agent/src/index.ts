@@ -16,6 +16,7 @@ import {
 } from "@ai16z/eliza";
 import { bootstrapPlugin } from "@ai16z/plugin-bootstrap";
 import { solanaPlugin } from "@ai16z/plugin-solana";
+import { evmPlugin } from "@ai16z/plugin-evm";
 import { nodePlugin } from "@ai16z/plugin-node";
 import Database from "better-sqlite3";
 import fs from "fs";
@@ -224,7 +225,16 @@ export async function createAgent(
     token: string
 ) {
     console.log("Creating runtime for character", character.name);
-    console.log("character.settings.secrets?.WALLET_PUBLIC_KEY", character.settings.secrets?.WALLET_PUBLIC_KEY)
+    
+    // Initialize EVM plugin configuration
+    const evmConfig = {
+        walletPrivateKey: character.settings.secrets?.WALLET_PRIVATE_KEY,
+        walletPublicKey: character.settings.secrets?.WALLET_PUBLIC_KEY,
+        rpcUrl: character.settings.secrets?.EVM_RPC_URL || process.env.EVM_RPC_URL,
+        chainId: character.settings.secrets?.EVM_CHAIN_ID || process.env.EVM_CHAIN_ID,
+        contractAddresses: character.settings.secrets?.EVM_CONTRACT_ADDRESSES || process.env.EVM_CONTRACT_ADDRESSES
+    };
+
     return new AgentRuntime({
         databaseAdapter: db,
         token,
@@ -234,7 +244,7 @@ export async function createAgent(
         plugins: [
             bootstrapPlugin,
             nodePlugin,
-            character.settings.secrets?.WALLET_PUBLIC_KEY ? solanaPlugin : null,
+            evmPlugin
         ].filter(Boolean),
         providers: [],
         actions: [],
