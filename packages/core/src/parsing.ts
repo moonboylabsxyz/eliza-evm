@@ -65,7 +65,7 @@ export function parseJsonArrayFromText(text: string) {
     if (jsonBlockMatch) {
         try {
             jsonData = JSON.parse(jsonBlockMatch[1]);
-        } catch (e) {
+        } catch {
             return null;
         }
     } else {
@@ -75,7 +75,7 @@ export function parseJsonArrayFromText(text: string) {
         if (arrayMatch) {
             try {
                 jsonData = JSON.parse(arrayMatch[0]);
-            } catch (e) {
+            } catch {
                 return null;
             }
         }
@@ -108,7 +108,7 @@ export function parseJSONObjectFromText(
     if (jsonBlockMatch) {
         try {
             jsonData = JSON.parse(jsonBlockMatch[1]);
-        } catch (e) {
+        } catch {
             return null;
         }
     } else {
@@ -118,7 +118,7 @@ export function parseJSONObjectFromText(
         if (objectMatch) {
             try {
                 jsonData = JSON.parse(objectMatch[0]);
-            } catch (e) {
+            } catch {
                 return null;
             }
         }

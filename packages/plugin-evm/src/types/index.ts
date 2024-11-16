@@ -4,6 +4,12 @@ import type { mainnet, base } from 'viem/chains'
 // Chain types
 export type SupportedChain = 'ethereum' | 'base'
 
+export interface ChainConfig {
+  chain: typeof mainnet | typeof base
+  publicClient: PublicClient
+  walletClient?: WalletClient
+}
+
 // Configuration types
 export interface EvmPluginConfig {
   rpcUrl?: {

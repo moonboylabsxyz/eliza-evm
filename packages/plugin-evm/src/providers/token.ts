@@ -1,9 +1,17 @@
 import { type PublicClient, formatUnits } from 'viem'
 import type { Token } from '@lifi/types'
 import { CHAIN_CONFIGS } from './wallet'
+import type { WalletProvider } from './wallet'
 
 export class TokenProvider {
-  constructor(private publicClients: Record<string, PublicClient>) {}
+  private publicClients: Record<string, PublicClient>
+
+  constructor(walletProvider: WalletProvider) {
+    this.publicClients = {
+      ethereum: walletProvider.getPublicClient('ethereum'),
+      base: walletProvider.getPublicClient('base')
+    }
+  }
 
   async getTokenBalance(params: {
     chain: 'ethereum' | 'base'

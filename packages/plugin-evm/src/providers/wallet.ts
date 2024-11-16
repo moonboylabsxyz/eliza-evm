@@ -2,9 +2,17 @@ import { createPublicClient, createWalletClient, http, custom, type PublicClient
 import { mainnet, base } from 'viem/chains'
 import type { SupportedChain, ChainConfig } from '../types'
 
-const DEFAULT_RPC_URLS = {
-  ethereum: 'https://eth.llamarpc.com',
-  base: 'https://base.llamarpc.com'
+export const CHAIN_CONFIGS = {
+  ethereum: {
+    chainId: 1,
+    chain: mainnet,
+    rpcUrl: 'https://eth.llamarpc.com'
+  },
+  base: {
+    chainId: 8453,
+    chain: base,
+    rpcUrl: 'https://base.llamarpc.com'
+  }
 } as const
 
 export class WalletProvider {
@@ -17,14 +25,20 @@ export class WalletProvider {
         chain: mainnet,
         publicClient: createPublicClient({
           chain: mainnet,
-          transport: http(rpcUrls?.ethereum || DEFAULT_RPC_URLS.ethereum)
+          transport: http(rpcUrls?.ethereum || CHAIN_CONFIGS.ethereum.rpcUrl),
+          batch: {
+            multicall: true
+          }
         })
       },
       base: {
         chain: base,
         publicClient: createPublicClient({
           chain: base,
-          transport: http(rpcUrls?.base || DEFAULT_RPC_URLS.base)
+          transport: http(rpcUrls?.base || CHAIN_CONFIGS.base.rpcUrl),
+          batch: {
+            multicall: true
+          }
         })
       }
     }

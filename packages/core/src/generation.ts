@@ -7,7 +7,7 @@ import {
     generateObject as aiGenerateObject,
     GenerateObjectResult,
 } from "ai";
-import { IImageDescriptionService, ModelClass, Service } from "./types.ts";
+import { IImageDescriptionService, ModelClass } from "./types.ts";
 import { Buffer } from "buffer";
 import { createOllama } from "ollama-ai-provider";
 import OpenAI from "openai";
