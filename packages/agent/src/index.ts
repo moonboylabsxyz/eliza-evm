@@ -16,12 +16,13 @@ import {
 } from "@ai16z/eliza";
 import { bootstrapPlugin } from "@ai16z/plugin-bootstrap";
 import { solanaPlugin } from "@ai16z/plugin-solana";
-import { evmPlugin } from "@ai16z/plugin-evm";
+import { EvmPlugin } from "@ai16z/plugin-evm";
 import { nodePlugin } from "@ai16z/plugin-node";
 import Database from "better-sqlite3";
 import fs from "fs";
 import readline from "readline";
 import yargs from "yargs";
+import { plugins } from './config';
 
 export const wait = (minTime: number = 1000, maxTime: number = 3000) => {
     const waitTime =
@@ -244,7 +245,7 @@ export async function createAgent(
         plugins: [
             bootstrapPlugin,
             nodePlugin,
-            evmPlugin
+            new EvmPlugin()
         ].filter(Boolean),
         providers: [],
         actions: [],

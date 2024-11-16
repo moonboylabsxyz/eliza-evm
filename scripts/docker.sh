@@ -40,6 +40,7 @@ case "$1" in
             -v "$(pwd)/packages/core/src:/app/packages/core/src" \
             -v "$(pwd)/packages/core/types:/app/packages/core/types" \
             -v "$(pwd)/packages/plugin-bootstrap/src:/app/packages/plugin-bootstrap/src" \
+            -v "$(pwd)/packages/plugin-evm/src:/app/packages/plugin-evm/src" \
             -v "$(pwd)/packages/plugin-image-generation/src:/app/packages/plugin-image-generation/src" \
             -v "$(pwd)/packages/plugin-node/src:/app/packages/plugin-node/src" \
             -v "$(pwd)/packages/plugin-solana/src:/app/packages/plugin-solana/src" \
