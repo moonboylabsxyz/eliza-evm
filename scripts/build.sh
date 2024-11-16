@@ -37,6 +37,7 @@ PACKAGES=(
     "plugin-bootstrap"
     "plugin-image-generation"
     "plugin-evm"
+    "agent"
 )
 
 # Build packages in specified order
