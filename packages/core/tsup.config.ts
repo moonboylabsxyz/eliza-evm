@@ -20,6 +20,17 @@ export default defineConfig({
         "tiktoken",
         "tinyld",
         "together-ai",
-        "uuid"
+        "uuid",
+        "fs",
+        "path",
+        "url"
     ],
+    platform: 'node',
+    target: 'node23',
+    dts: true,
+    treeshake: true,
+    splitting: false,
+    esbuildOptions(options) {
+        options.conditions = ['import', 'node']
+    }
 });
